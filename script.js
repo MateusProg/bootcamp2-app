@@ -5,10 +5,13 @@ async function buscarDados(termo) {
     const resposta = await fetch(`https://pokeapi.co/api/v2/pokemon/${termo}`);
     if (!resposta.ok) throw new Error("Nao encontrado");
     const dados = await resposta.json();
+    const tipos = []
+    dados.types.forEach(tipo => tipos.push(tipo.type.name));
     area.innerHTML = `
       <h2>${dados.name}</h2>
       <img src="${dados.sprites.front_default}" alt="${dados.name}">
-      <p>Altura: ${dados.height} | Peso: ${dados.weight}</p>
+      <img src="${dados.sprites.front_shiny}" alt="${dados.name}">
+      <p>Altura: ${dados.height} | Peso: ${dados.weight} | Tipo(s): ${tipos}</p>
     `;
   } catch (erro) {
     area.innerHTML = "<p>Ops! Nada encontrado. Tente outro termo.</p>";
