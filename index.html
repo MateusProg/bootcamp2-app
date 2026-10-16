@@ -30,68 +30,152 @@
     <br>
     <br>
 
-    <div id="resultado" class="resultado">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-    </div>
+    <div id="resultado" class="resultado"></div>
 
     <br>
     <br>
 
     <h3 class="mod-btn">CRIE SEU TIME</h3>
+
     <br>
+
+    <h4 class="centralizar">Procure um pokémon na barra de busca para poder adicioná-lo no time abaixo</h4>
+
+    <br>
+    <p class="centralizar">Você precisa acrescentar todos os 6 pokémons nos espaços correspondentes para poder adicionar um time pokémon com sucesso! O nome do time é opicional</p>
+    <br>
+
+    <div class="centralizar">
+        <label for="">Nome do time:&nbsp;</label>
+        <input type="text" name="" id="nome-time">
+    </div>
+
+    <br>
+
     <div class="centralizar">
         <button type="submit" id="pkmn1">
-            <img id="img1" src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg" alt="pkmn1" width="100" height="100">
+            <img id="img1"
+                src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg"
+                alt="pkmn1" width="100" height="100">
         </button>
         <button type="submit" id="pkmn2">
-            <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg" alt="pkmn1" width="100" height="100">
+            <img id="img2"
+                src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg"
+                alt="pkmn1" width="100" height="100">
         </button>
         <button type="submit" id="pkmn3">
-            <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg" alt="pkmn1" width="100" height="100">
+            <img id="img3"
+                src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg"
+                alt="pkmn1" width="100" height="100">
         </button>
         <button type="submit" id="pkmn4">
-            <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg" alt="pkmn1" width="100" height="100">
+            <img id="img4"
+                src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg"
+                alt="pkmn1" width="100" height="100">
         </button>
         <button type="submit" id="pkmn5">
-            <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg" alt="pkmn1" width="100" height="100">
+            <img id="img5"
+                src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg"
+                alt="pkmn1" width="100" height="100">
         </button>
         <button type="submit" id="pkmn6">
-            <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg" alt="pkmn1" width="100" height="100">
+            <img id="img6"
+                src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg"
+                alt="pkmn1" width="100" height="100">
         </button>
+    </div>
+
+    <br>
+
+    <div class="centralizar">
+        <button type="submit" id="botao-inserir">Inserir Time</button>
     </div>
 
     <script src="script.js"></script>
     <script type="module">
         import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
         const supabase = createClient("https://szjhexvpzheiskkaqnoq.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6amhleHZwemhlaXNra2Fxbm9xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIwNzExMzUsImV4cCI6MjEwNzY0NzEzNX0.lDyIP3AlimUY_nrWOT-svd5LD-UQhpI2StNAglhbzko");
+        var pkmn1;
+        var pkmn2;
+        var pkmn3;
+        var pkmn4;
+        var pkmn5;
+        var pkmn6;
 
-        async function teste(texto) {
-            const { error } = await supabase.from("teste").insert({ text: texto });
-            if (error) console.error(error);
+        async function getCurrent(idImagem) {
+            if (currentData) {
+                if (document.getElementById(idImagem).src == currentData.sprites.front_default) {
+                    addPkmn(idImagem, null);
+                    document.getElementById(idImagem).src = "https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg"
+                } else {
+                    addPkmn(idImagem, currentData);
+                    document.getElementById(idImagem).src = currentData.sprites.front_default;
+                }
+            } else {
+                addPkmn(idImagem, currentData);
+                document.getElementById(idImagem).src = "https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg"
+            }
         }
 
-        async function getCurrent() {
-            if (document.getElementById("img1").src == "https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg") 
-             document.getElementById("img1").src = currentData.sprites.front_default;
-             else
-             document.getElementById("img1").src = "https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg"            
+        async function addPkmn(idImagem, currentData) {
+            switch (idImagem) {
+                case "img1":
+                    pkmn1 = currentData;
+                    break;
+                case "img2":
+                    pkmn2 = currentData;
+                    break;
+                case "img3":
+                    pkmn3 = currentData;
+                    break;
+                case "img4":
+                    pkmn4 = currentData;
+                    break;
+                case "img5":
+                    pkmn5 = currentData;
+                    break;
+                case "img6":
+                    pkmn6 = currentData;
+                    break;
+            }
         }
 
         document.getElementById("pkmn1").addEventListener("click", () => {
-             if (currentData) getCurrent();
+            getCurrent("img1");
+        });
+        document.getElementById("pkmn2").addEventListener("click", () => {
+            getCurrent("img2");
+        });
+        document.getElementById("pkmn3").addEventListener("click", () => {
+            getCurrent("img3");
+        });
+        document.getElementById("pkmn4").addEventListener("click", () => {
+            getCurrent("img4");
+        });
+        document.getElementById("pkmn5").addEventListener("click", () => {
+            getCurrent("img5");
+        });
+        document.getElementById("pkmn6").addEventListener("click", () => {
+            getCurrent("img6");
+        });
+
+        document.getElementById("botao-inserir").addEventListener("click", () => {
+            const resposta = window.confirm("Você tem certeza de que deseja salvar esse time?");
+
+            if (resposta) salvarTime(pkmn1, pkmn2, pkmn3, pkmn4, pkmn5, pkmn6, document.getElementById("nome-time").value);
         });
 
         // CREATE — salvar um favorito
-        async function salvarFavorito(nome, extra) {
-            const { error } = await supabase.from("favoritos").insert({ nome_item: nome, dados_extra: extra });
-            if (error) console.error(error);
+        async function salvarTime(pkmn1, pkmn2, pkmn3, pkmn4, pkmn5, pkmn6, nome) {
+            const { error } = await supabase.from("PokemonTeams").insert({ pokemon1: pkmn1, pokemon2: pkmn2, pokemon3: pkmn3, pokemon4: pkmn4, pokemon5: pkmn5, pokemon6: pkmn6, name: nome });
+            if (error) {
+                console.error(error);
+                currentData = null;
+                document.getElementById("resultado").innerHTML = "<p>Ops! Condições não atendidas!</p>"
+            } else {
+                currentData = null;
+                document.getElementById("resultado").innerHTML = "<p>Time adicionado com sucesso!</p>"
+            }
         }
 
         // READ — listar favoritos

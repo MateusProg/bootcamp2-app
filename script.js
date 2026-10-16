@@ -15,6 +15,7 @@ async function buscarDados(termo) {
       <p>Altura: ${dados.height} | Peso: ${dados.weight} | Tipo(s): ${tipos}</p>
     `;
   } catch (erro) {
+    currentData = null;
     area.innerHTML = "<p>Ops! Nada encontrado. Tente outro termo.</p>";
   }
 }
