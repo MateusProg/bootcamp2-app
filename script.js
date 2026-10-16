@@ -5,6 +5,7 @@ async function buscarDados(termo) {
     const resposta = await fetch(`https://pokeapi.co/api/v2/pokemon/${termo}`);
     if (!resposta.ok) throw new Error("Nao encontrado");
     const dados = await resposta.json();
+    currentData = dados;
     const tipos = []
     dados.types.forEach(tipo => tipos.push(tipo.type.name));
     area.innerHTML = `
@@ -22,3 +23,5 @@ document.getElementById("botao-buscar").addEventListener("click", () => {
   const termo = document.getElementById("campo-busca").value.toLowerCase().trim();
   if (termo) buscarDados(termo);
 });
+
+var currentData;

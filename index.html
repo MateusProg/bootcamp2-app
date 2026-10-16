@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bootcamp2-app</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="carousel-panel">
         <h1>Projeto Bootcamp 2</h1>
@@ -13,7 +15,7 @@
     </div>
 
     <br>
-    
+
     <div class="mod-btn">
         <label for="">Buscar pokemon:&nbsp;</label>
         <input type="text" name="" id="campo-busca">
@@ -39,6 +41,71 @@
         <br>
     </div>
 
+    <br>
+    <br>
+
+    <h3 class="mod-btn">CRIE SEU TIME</h3>
+    <br>
+    <div class="centralizar">
+        <button type="submit" id="pkmn1">
+            <img id="img1" src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg" alt="pkmn1" width="100" height="100">
+        </button>
+        <button type="submit" id="pkmn2">
+            <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg" alt="pkmn1" width="100" height="100">
+        </button>
+        <button type="submit" id="pkmn3">
+            <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg" alt="pkmn1" width="100" height="100">
+        </button>
+        <button type="submit" id="pkmn4">
+            <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg" alt="pkmn1" width="100" height="100">
+        </button>
+        <button type="submit" id="pkmn5">
+            <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg" alt="pkmn1" width="100" height="100">
+        </button>
+        <button type="submit" id="pkmn6">
+            <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg" alt="pkmn1" width="100" height="100">
+        </button>
+    </div>
+
     <script src="script.js"></script>
+    <script type="module">
+        import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+        const supabase = createClient("https://szjhexvpzheiskkaqnoq.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6amhleHZwemhlaXNra2Fxbm9xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIwNzExMzUsImV4cCI6MjEwNzY0NzEzNX0.lDyIP3AlimUY_nrWOT-svd5LD-UQhpI2StNAglhbzko");
+
+        async function teste(texto) {
+            const { error } = await supabase.from("teste").insert({ text: texto });
+            if (error) console.error(error);
+        }
+
+        async function getCurrent() {
+            if (document.getElementById("img1").src == "https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg") 
+             document.getElementById("img1").src = currentData.sprites.front_default;
+             else
+             document.getElementById("img1").src = "https://static.vecteezy.com/ti/vetor-gratis/p1/9684280-vector-sinal-do-simbolo-mais-esta-isolado-em-um-fundo-branco-mais-icone-cor-editavel-vetor.jpg"            
+        }
+
+        document.getElementById("pkmn1").addEventListener("click", () => {
+             if (currentData) getCurrent();
+        });
+
+        // CREATE — salvar um favorito
+        async function salvarFavorito(nome, extra) {
+            const { error } = await supabase.from("favoritos").insert({ nome_item: nome, dados_extra: extra });
+            if (error) console.error(error);
+        }
+
+        // READ — listar favoritos
+        async function listarFavoritos() {
+            const { data, error } = await supabase.from("favoritos").select("*").order("criado_em");
+            if (!error) renderizarLista(data);   // funcao sua, que desenha na tela
+        }
+
+        // DELETE — remover um favorito
+        async function removerFavorito(id) {
+            await supabase.from("favoritos").delete().eq("id", id);
+            listarFavoritos();
+        }
+    </script>
 </body>
+
 </html>
