@@ -38,7 +38,7 @@
 html,
 body {
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
     /* virtual scroll engine owns the page */
     overscroll-behavior: none;
 }

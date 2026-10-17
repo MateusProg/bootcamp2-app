@@ -42,7 +42,8 @@
     <h4 class="centralizar">Procure um pokémon na barra de busca para poder adicioná-lo no time abaixo</h4>
 
     <br>
-    <p class="centralizar">Você precisa acrescentar todos os 6 pokémons nos espaços correspondentes para poder adicionar um time pokémon com sucesso! O nome do time é opicional</p>
+    <p class="centralizar">Você precisa acrescentar todos os 6 pokémons nos espaços correspondentes para poder adicionar
+        um time pokémon com sucesso! O nome do time é opicional</p>
     <br>
 
     <div class="centralizar">
@@ -89,6 +90,29 @@
 
     <div class="centralizar">
         <button type="submit" id="botao-inserir">Inserir Time</button>
+    </div>
+
+    <br>
+
+    <h3 class="mod-btn">LISTAR TIMES</h3>
+
+    <br>
+
+    <div class="centralizar">
+        <button type="submit" id="botao-listar">Listar</button>
+    </div>
+
+    <br>
+
+    <h3 class="mod-btn">DELETAR TIME</h3>
+
+    <br>
+
+    <div class="centralizar">
+        <input type="number" placeholder="0" min="0" name="" id="id-time">
+        <br>
+        <br>
+        <button type="submit" id="botao-deletar">Deletar</button>
     </div>
 
     <script src="script.js"></script>
@@ -165,7 +189,15 @@
             if (resposta) salvarTime(pkmn1, pkmn2, pkmn3, pkmn4, pkmn5, pkmn6, document.getElementById("nome-time").value);
         });
 
-        // CREATE — salvar um favorito
+        document.getElementById("botao-listar").addEventListener("click", () => {
+            listarTimes();
+        });
+
+        document.getElementById("botao-deletar").addEventListener("click", () => {
+            removerTime(document.getElementById("id-time").value);
+        });
+
+        // CREATE — salvar um time
         async function salvarTime(pkmn1, pkmn2, pkmn3, pkmn4, pkmn5, pkmn6, nome) {
             const { error } = await supabase.from("PokemonTeams").insert({ pokemon1: pkmn1, pokemon2: pkmn2, pokemon3: pkmn3, pokemon4: pkmn4, pokemon5: pkmn5, pokemon6: pkmn6, name: nome });
             if (error) {
@@ -178,16 +210,41 @@
             }
         }
 
-        // READ — listar favoritos
-        async function listarFavoritos() {
-            const { data, error } = await supabase.from("favoritos").select("*").order("criado_em");
-            if (!error) renderizarLista(data);   // funcao sua, que desenha na tela
+        // READ — listar times
+        async function listarTimes() {
+            const { data, error } = await supabase.from("PokemonTeams").select("*").order('created_at', { ascending: true });
+            if (!error) {
+                currentData = null;
+                document.getElementById("resultado").innerHTML = "";
+                data.forEach(element => {
+                    let localNome = element.name;
+                    if (localNome == "") localNome = "EMPTY"
+
+                    document.getElementById("resultado").innerHTML += `
+                    <h2 class="centralizar">${localNome}</h2>
+                    <p class="centralizar">ID: ${element.id}</p>
+                    <img src="${element.pokemon1.sprites.front_default}" alt="${element.pokemon1.name}">
+                    <img src="${element.pokemon2.sprites.front_default}" alt="${element.pokemon2.name}">
+                    <img src="${element.pokemon3.sprites.front_default}" alt="${element.pokemon3.name}">
+                    <img src="${element.pokemon4.sprites.front_default}" alt="${element.pokemon4.name}">
+                    <img src="${element.pokemon5.sprites.front_default}" alt="${element.pokemon5.name}">
+                    <img src="${element.pokemon6.sprites.front_default}" alt="${element.pokemon6.name}">
+                    <br>
+                    `
+
+                });
+                
+            } else {
+                currentData = null;
+                document.getElementById("resultado").innerHTML = "<p>Não foi possível concluir a ação!</p>"
+            }
         }
 
-        // DELETE — remover um favorito
-        async function removerFavorito(id) {
-            await supabase.from("favoritos").delete().eq("id", id);
-            listarFavoritos();
+        // DELETE — remover um time
+        async function removerTime(id) {
+            currentData = null;
+            await supabase.from("PokemonTeams").delete().eq("id", id);
+            listarTimes();
         }
     </script>
 </body>
