@@ -4,7 +4,7 @@
 Mateus Gomes de Oliveira — Matrícula 22609084
 
 ## Descrição
-Busca um pokémon a partir do nome do mesmo, útil para saber informações simples e rápidas sobre um pokémon específico.
+Busca um pokémon a partir do nome do mesmo, útil para saber informações simples e rápidas sobre um pokémon específico. Agora com capacidade de persistência de times em um banco de dados.
 
 ## API utilizada
 - PokéAPI: [link da documentação](https://pokeapi.co/docs/v2)
